@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.edg.presenter.home.ui.HomeScreen
+import com.edg.presenter.home.ui.ProductListScreen
 import com.edg.presenter.ui.theme.EndeavourTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,33 +26,10 @@ class HomeActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 
-           // viewModel = hiltViewModel()
-
-          //  viewModel.getProducts()
-
-
-            EndeavourTheme() {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    HomeScreen()
-                }
+            EndeavourTheme {
+                HomeScreen()
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    EndeavourTheme {
-        Greeting("Android")
-    }
-}

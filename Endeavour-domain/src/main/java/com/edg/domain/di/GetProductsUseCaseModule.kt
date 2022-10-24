@@ -1,7 +1,9 @@
 package com.edg.domain.di
 
-import com.edg.domain.usecase.GetProductsUseCase
-import com.edg.domain.usecase.GetProductsUseCaseImpl
+import com.edg.domain.usecase.favouriteproduts.FavProductsUseCaseImpl
+import com.edg.domain.usecase.favouriteproduts.GetFavProductsUseCase
+import com.edg.domain.usecase.getproducts.GetProductsUseCase
+import com.edg.domain.usecase.getproducts.GetProductsUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -13,5 +15,12 @@ import javax.inject.Singleton
 abstract class GetProductsUseCaseModule {
     @Binds
     @Singleton
-    internal abstract fun bindGetProductsUseCase(useCaseImpl: GetProductsUseCaseImpl): GetProductsUseCase
+    internal abstract fun bindGetProductsUseCase(useCaseImpl: GetProductsUseCaseImpl)
+    : GetProductsUseCase
+
+    @Binds
+    @Singleton
+    internal abstract fun bindFavProductsUseCase(useCaseImpl: FavProductsUseCaseImpl)
+            : GetFavProductsUseCase
+
 }

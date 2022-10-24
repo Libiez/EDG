@@ -1,4 +1,4 @@
-package com.edg.domain.usecase
+package com.edg.domain.usecase.getproducts
 
 import com.edg.domain.models.products.Product
 import com.edg.domain.models.products.Products

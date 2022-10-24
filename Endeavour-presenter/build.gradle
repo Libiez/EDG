@@ -45,12 +45,15 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+
 }
 
 dependencies {
 
     implementation project(path: ':Endeavour-domain')
     implementation project(path: ':Endeavour-data')
+
+    implementation("io.coil-kt:coil-compose:2.0.0-rc01")
 
 
     //Dagger - Hilt

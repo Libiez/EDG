@@ -12,6 +12,9 @@ buildscript {
         lifecycleViewModelKtx = "2.6.0-alpha02"
         hiltNavigationComposeVersion = "1.0.0"
         materialIconsVersions = "1.2.1"
+        roomVersion = "2.3.0"
+        kaptRoomCompilerVersion = "2.3.0"
+        roomKtxVersion = "2.3.0"
     }
 }// Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {

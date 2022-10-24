@@ -24,7 +24,7 @@ fun AppBottomNavigation(navController: NavController) {
 
         navItem.forEach { item ->
             BottomNavigationItem(
-                icon = { Icon(painterResource(id = item.icon), contentDescription = stringResource(item.title))},
+                icon = { Icon( imageVector = item.icon, contentDescription = stringResource(item.title))},
                 label = { Text(text = stringResource(item.title), fontSize = 9.sp) },
                 selectedContentColor = Color.White,
                 unselectedContentColor = Color.White.copy(0.4f),

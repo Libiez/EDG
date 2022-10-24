@@ -33,6 +33,6 @@ class GetProductsRepositoryImpl @Inject constructor(private val api: EndeavourAp
                 message = " Couldn't reach the network, Please check you network connection"))
         }
 
-    }.flowOn(Dispatchers.IO)
+    }
 
 }

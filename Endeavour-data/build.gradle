@@ -29,11 +29,20 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    configurations {
+        cleanedAnnotations
+        compile.exclude group: 'org.jetbrains' , module:'annotations'
+    }
 }
 
 dependencies {
 
     implementation project(path: ':Endeavour-domain')
+
+    //Room
+    implementation "androidx.room:room-runtime:$roomVersion"
+    annotationProcessor "androidx.room:room-compiler:$kaptRoomCompilerVersion"
+    implementation "androidx.room:room-ktx:$roomKtxVersion"
 
     //Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"

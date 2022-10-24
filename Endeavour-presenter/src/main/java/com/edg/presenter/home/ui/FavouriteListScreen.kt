@@ -9,6 +9,6 @@ import androidx.compose.ui.unit.sp
 import com.edg.presenter.home.HomeViewModel
 
 @Composable
-fun FavouriteListScreen(text: String) = Surface(modifier = Modifier.fillMaxSize()) {
-    Text(text = text, fontSize = 32.sp)
+fun FavouriteListScreen(viewModel: HomeViewModel) = Surface(modifier = Modifier.fillMaxSize()) {
+
 }

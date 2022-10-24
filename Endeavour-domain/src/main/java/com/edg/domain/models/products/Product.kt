@@ -5,5 +5,10 @@ data class Product(
     val price: List<Price>,
     val ratingCount: Double,
     val title: String,
+    val brand: String,
+    val id: String
+
 ) {
+
+
 }
