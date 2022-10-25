@@ -1,4 +1,4 @@
-package com.edg.presenter.home.ui.navigation
+package com.edg.presenter.home.compose.navigation
 
 
 import androidx.annotation.DrawableRes

@@ -1,4 +1,4 @@
-package com.edg.presenter.home.ui
+package com.edg.presenter.home.compose
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
@@ -29,7 +29,9 @@ import kotlinx.coroutines.flow.collectLatest
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun ProductListScreen(viewModel: HomeViewModel) = Surface(modifier = Modifier.fillMaxSize()) {
+fun ProductListScreen(
+    viewModel: HomeViewModel,
+    navigateToProductDetails: (Product) -> Unit) = Surface(modifier = Modifier.fillMaxSize()) {
 
     val scaffoldState = rememberScaffoldState()
     val state = viewModel.state.value
@@ -46,11 +48,11 @@ fun ProductListScreen(viewModel: HomeViewModel) = Surface(modifier = Modifier.fi
         }
     }
 
-    ProductListing(state.productsItems,viewModel)
+    ProductListing(state.productsItems,viewModel,navigateToProductDetails)
 }
 
 @Composable
-fun ProductListing(productsItems: List<Product>, viewModel: HomeViewModel) {
+fun ProductListing(productsItems: List<Product>, viewModel: HomeViewModel,navigateToProductDetails: (Product) -> Unit) {
 
     Box(
         modifier = Modifier.background(OFF_WHITE)
@@ -67,7 +69,7 @@ fun ProductListing(productsItems: List<Product>, viewModel: HomeViewModel) {
                 if (index > 0) {
                     Spacer(modifier = Modifier.height(8.dp))
                 }
-                ProductItem(item = product,viewModel)
+                ProductItem(item = product,viewModel,navigateToProductDetails)
             }
 
         }
@@ -76,13 +78,13 @@ fun ProductListing(productsItems: List<Product>, viewModel: HomeViewModel) {
 }
 
 @Composable
-fun ProductItem(item: Product, viewModel: HomeViewModel) {
+fun ProductItem(item: Product, viewModel: HomeViewModel,navigateToProductDetails: (Product) -> Unit) {
 
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp)
-            .clickable { },
+            .clickable {navigateToProductDetails(item) },
         elevation = 2.dp
     ) {
         Column() {

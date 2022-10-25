@@ -1,4 +1,4 @@
-package com.edg.presenter.home.ui
+package com.edg.presenter.home.compose
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

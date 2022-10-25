@@ -1,7 +1,6 @@
-package com.edg.presenter.home.ui
+package com.edg.presenter.home.compose
 
 import com.edg.domain.models.products.Product
-import com.edg.domain.models.products.Products
 
 data class ProductListState(
 

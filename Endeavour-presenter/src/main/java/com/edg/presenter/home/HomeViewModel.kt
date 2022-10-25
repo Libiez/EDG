@@ -1,6 +1,5 @@
 package com.edg.presenter.home
 
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -9,7 +8,7 @@ import com.edg.domain.models.products.Product
 import com.edg.domain.usecase.favouriteproduts.GetFavProductsUseCase
 import com.edg.domain.usecase.getproducts.GetProductsUseCase
 import com.edg.domain.utils.Resource
-import com.edg.presenter.home.ui.ProductListState
+import com.edg.presenter.home.compose.ProductListState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
