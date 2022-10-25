@@ -2,4 +2,5 @@
     <string name="app_name">Endeavour</string>
     <string name="home">Home</string>
     <string name="fav">Favourites</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>

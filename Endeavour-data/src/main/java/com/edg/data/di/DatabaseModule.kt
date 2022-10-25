@@ -3,6 +3,7 @@ package com.edg.data.di
 import android.app.Application
 import androidx.room.Room
 import com.edg.data.local.Converters
+import com.edg.data.local.FavProductDao
 import com.edg.data.local.FavProductDatabase
 import com.edg.data.util.GsonParser
 import com.google.gson.Gson
@@ -27,6 +28,8 @@ object DatabaseModule {
 
     @Singleton
     @Provides
-    fun provideFavouriteProductDao(database: FavProductDatabase) = database.dao
+    fun provideFavouriteProductDao(database: FavProductDatabase): FavProductDao {
+        return database.dao
+    }
 
 }

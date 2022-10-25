@@ -7,11 +7,13 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.edg.presenter.R
 import com.edg.presenter.home.HomeViewModel
 import com.edg.presenter.home.ui.navigation.AppBottomNavigation
 import com.edg.presenter.home.ui.navigation.NAV_FAV

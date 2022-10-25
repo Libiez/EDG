@@ -17,6 +17,11 @@
         android:theme="@style/Theme.Endeavour"
         tools:targetApi="31">
         <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.Endeavour" />
+        <activity
             android:name=".home.HomeActivity"
             android:exported="true"
             android:label="@string/app_name"
