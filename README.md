@@ -2,6 +2,7 @@
 
 EDG Product app 
 
+<img src="https://github.com/Libiez/MyApplication/blob/master/endevour.gif" width="186">  
 <img src="https://github.com/Libiez/MyApplication/blob/master/Screenshot_1.png" width="186">  
 <img src="https://github.com/Libiez/MyApplication/blob/master/Screenshot_2.png" width="186">  
 <img src="https://github.com/Libiez/MyApplication/blob/master/Screenshot_3.png" width="186">  
