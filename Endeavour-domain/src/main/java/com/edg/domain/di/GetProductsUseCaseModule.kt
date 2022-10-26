@@ -1,7 +1,7 @@
 package com.edg.domain.di
 
-import com.edg.domain.usecase.favouriteproduts.FavProductsUseCaseImpl
-import com.edg.domain.usecase.favouriteproduts.GetFavProductsUseCase
+import com.edg.domain.usecase.favProducts.FavProductsUseCaseImpl
+import com.edg.domain.usecase.favProducts.GetFavProductsUseCase
 import com.edg.domain.usecase.getproducts.GetProductsUseCase
 import com.edg.domain.usecase.getproducts.GetProductsUseCaseImpl
 import dagger.Binds

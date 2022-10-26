@@ -1,5 +1,6 @@
 package com.edg.presenter.product.compose
 
+import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -13,36 +14,39 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.ContentAlpha
-import androidx.compose.material.Divider
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.Icon
-import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.outlined.AddShoppingCart
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.material.icons.twotone.Favorite
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
 import com.edg.domain.models.products.Product
 import com.edg.presenter.R
+import com.edg.presenter.product.ProductDetailsViewModel
 import com.edg.presenter.utils.AnimatingFabContent
 
 
 @Composable
-fun ProductScreen(product: Product, onNavIconPressed: () -> Unit = { }) {
+fun ProductScreen(product: Product) {
     val scrollState = rememberScrollState()
+    val viewModel = hiltViewModel<ProductDetailsViewModel>()
+
+    viewModel.isProductExist(product.id)
+
+    ToolBar(viewModel, product)
 
     Column(modifier = Modifier.fillMaxSize()) {
         BoxWithConstraints(modifier = Modifier.weight(1f)) {
@@ -52,6 +56,7 @@ fun ProductScreen(product: Product, onNavIconPressed: () -> Unit = { }) {
                         .fillMaxSize()
                         .verticalScroll(scrollState),
                 ) {
+                    ToolBar(viewModel, product)
                     ProfileHeader(
                         scrollState,
                         product,
@@ -67,6 +72,37 @@ fun ProductScreen(product: Product, onNavIconPressed: () -> Unit = { }) {
         }
     }
 }
+
+@Composable
+fun ToolBar(viewModel: ProductDetailsViewModel, product: Product) {
+    val activity = (LocalContext.current as? Activity)
+
+    Column {
+        TopAppBar(
+            elevation = 4.dp,
+            title = {
+                Text("")
+            },
+            backgroundColor = MaterialTheme.colors.primarySurface,
+            navigationIcon = {
+                IconButton(onClick = { activity?.finish() }) {
+                    Icon(Icons.Filled.ArrowBack, null)
+                }
+            }, actions = {
+                IconButton(onClick = {
+                    if (viewModel.stateVariable) viewModel.removeFavouriteProduct(product.id) else viewModel.addFavouriteProduct(
+                        product
+                    )
+                }) {
+                    Icon(
+                        imageVector = if (viewModel.stateVariable) Icons.Filled.Favorite else Icons.TwoTone.Favorite,
+                        null
+                    )
+                }
+            })
+    }
+}
+
 
 @Composable
 private fun ProfileHeader(
@@ -99,7 +135,7 @@ private fun ProfileContent(product: Product, containerHeight: Dp) {
 
         ProfileProperty(stringResource(R.string.brand), " ${product.brand}")
 
-        ProfileProperty(stringResource(R.string.price), " ${product.price?.get(0)?.value}")
+        ProfileProperty(stringResource(R.string.price), " ${product.price[0].value}")
 
         ProfileProperty(stringResource(R.string.rating), " ${product.ratingCount}")
 

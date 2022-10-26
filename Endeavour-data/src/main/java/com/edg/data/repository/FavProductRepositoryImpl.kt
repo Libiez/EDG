@@ -23,6 +23,12 @@ class FavProductRepositoryImpl @Inject constructor(private val dao: FavProductDa
         val favProducts = dao.getFavouriteProducts().map { it.toProduct() }
         emit(Resource.Success(favProducts))
     }
+
+    override suspend fun isProductExist(id: String): Boolean {
+        return dao.isProductExist(id)
+    }
+
+
 }
 
 

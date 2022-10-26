@@ -17,7 +17,7 @@
         android:theme="@style/Theme.Endeavour"
         tools:targetApi="31">
         <activity
-            android:name=".product.ProductActivity"
+            android:name=".product.ProductDetailsActivity"
             android:exported="true"></activity>
 
         <activity

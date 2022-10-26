@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.edg.domain.models.products.Product
-import com.edg.domain.usecase.favouriteproduts.GetFavProductsUseCase
+import com.edg.domain.usecase.favProducts.GetFavProductsUseCase
 import com.edg.domain.usecase.getproducts.GetProductsUseCase
 import com.edg.domain.utils.Resource
 import com.edg.presenter.home.compose.ProductListState
@@ -32,10 +32,6 @@ class HomeViewModel @Inject constructor(
     private val _eventFlow = MutableSharedFlow<UIEvent>()
     val eventFlow = _eventFlow.asSharedFlow()
 
-    private val _deleteState = MutableStateFlow("")
-    val deleteState = _deleteState.asStateFlow()
-
-
     init {
         getAllProducts("2f06b453-8375-43cf-861a-06e95a951328")
     }
@@ -43,7 +39,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getAllProducts(categoryId: String) {
 
-        viewModelScope.launch() {
+        viewModelScope.launch {
 
             productsUseCase.getAllProducts(token = categoryId)
                 .onEach { result ->
@@ -86,23 +82,26 @@ class HomeViewModel @Inject constructor(
 
     fun addFavouriteProduct(product: Product) {
         viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                favProductsUseCase.addFavouriteProduct(product)
+            }
 
-            favProductsUseCase.addFavouriteProduct(product)
+            isProductExist(product.id)
+        }
+    }
+    private fun isProductExist(id: String) {
+        viewModelScope.launch {
+                favProductsUseCase.isProductExist(id)
         }
     }
 
     fun removeFavouriteProduct(id: String) {
-
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 favProductsUseCase.removeFavouriteProduct(id)
             }
-
             getAllFavouriteProducts()
-            _deleteState.emit("Product successfully deleted")
-
         }
-
     }
 
     fun getAllFavouriteProducts() {

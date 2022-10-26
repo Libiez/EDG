@@ -25,7 +25,7 @@ fun HomeScreen(navigateToProductDetails: (Product) -> Unit) {
         drawerContent = null) {
         NavHost(navController = navController, startDestination = NAV_HOME) {
             composable(NAV_HOME) { ProductListScreen(viewModel,navigateToProductDetails) }
-            composable(NAV_FAV) { FavouriteListScreen(viewModel) }
+            composable(NAV_FAV) { FavouriteListScreen(viewModel,navigateToProductDetails) }
         }
     }
 }

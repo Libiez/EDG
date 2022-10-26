@@ -18,4 +18,7 @@ interface FavProductDao {
     @Query("SELECT * FROM FavProductEntity")
     suspend fun getFavouriteProducts():List<FavProductEntity>
 
+    @Query("SELECT EXISTS(SELECT * FROM FavProductEntity WHERE id = :id)")
+    suspend fun isProductExist(id : String) : Boolean
+
 }

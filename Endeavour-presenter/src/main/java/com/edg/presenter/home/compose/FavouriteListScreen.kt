@@ -25,10 +25,9 @@ import com.edg.presenter.ui.theme.OFF_WHITE
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
-fun FavouriteListScreen(viewModel: HomeViewModel) = Surface(modifier = Modifier.fillMaxSize()) {
+fun FavouriteListScreen(viewModel: HomeViewModel,navigateToProductDetails: (Product) -> Unit) = Surface(modifier = Modifier.fillMaxSize()) {
 
     val scaffoldState = rememberScaffoldState()
-    val state = viewModel.state.value
     val favState = viewModel.stateFavProduct.value
 
     LaunchedEffect(key1 = true) {
@@ -41,23 +40,24 @@ fun FavouriteListScreen(viewModel: HomeViewModel) = Surface(modifier = Modifier.
                 }
             }
         }
-
-        viewModel.deleteState.collectLatest {
-            scaffoldState.snackbarHostState.showSnackbar(
-                message = it,
-                duration = SnackbarDuration.Short
-            )
+        viewModel.eventFlow.collectLatest { event ->
+            when (event) {
+                is HomeViewModel.UIEvent.ShowSnack -> {
+                    scaffoldState.snackbarHostState.showSnackbar(
+                        message = event.message
+                    )
+                }
+            }
         }
-
 
     }
 
     viewModel.getAllFavouriteProducts()
-    FavProductListing(favState.productsItems,viewModel)
+    FavProductListing(favState.productsItems,viewModel,navigateToProductDetails)
 }
 
 @Composable
-fun FavProductListing(productsItems: List<Product>, viewModel: HomeViewModel) {
+fun FavProductListing(productsItems: List<Product>,viewModel: HomeViewModel,navigateToProductDetails: (Product) -> Unit) {
 
     Box(
         modifier = Modifier.background(OFF_WHITE)
@@ -74,7 +74,7 @@ fun FavProductListing(productsItems: List<Product>, viewModel: HomeViewModel) {
                 if (index > 0) {
                     Spacer(modifier = Modifier.height(8.dp))
                 }
-                FavProductItem(item = product,viewModel)
+                FavProductItem(item = product,viewModel,navigateToProductDetails)
             }
 
         }
@@ -83,16 +83,16 @@ fun FavProductListing(productsItems: List<Product>, viewModel: HomeViewModel) {
 }
 
 @Composable
-fun FavProductItem(item: Product, viewModel: HomeViewModel,) {
+fun FavProductItem(item: Product, viewModel: HomeViewModel,navigateToProductDetails: (Product) -> Unit) {
 
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp)
-            .clickable { },
+            .clickable {navigateToProductDetails(item)},
         elevation = 2.dp
     ) {
-        Column() {
+        Column {
             Row(modifier = Modifier.padding(all = 8.dp)) {
                 FavImageLoader(item.imageURL)
                 Spacer(modifier = Modifier.width(8.dp))
@@ -106,12 +106,7 @@ fun FavProductItem(item: Product, viewModel: HomeViewModel,) {
 
 @Composable
 fun FavBottomLayout(item: Product, viewModel: HomeViewModel) {
-    Spacer(modifier = Modifier.height(0.1.dp))
-  /*  Divider(
-        modifier = Modifier.padding(start = 20.dp, end = 20.dp),
-        color = Color.Gray,
-        thickness = 1.dp
-    )*/
+
     Spacer(modifier = Modifier.height(8.dp))
 
     Row(
@@ -181,7 +176,7 @@ fun FavContentLoader(item: Product) {
         Spacer(modifier = Modifier.height(4.dp))
 
         Text(
-            text = "$ ${item.price?.get(0)?.value.toString()}",
+            text = "$ ${item.price[0].value}",
             fontSize = 12.sp,
             fontWeight = FontWeight.Medium,
             style = MaterialTheme.typography.h6

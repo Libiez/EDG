@@ -1,4 +1,4 @@
-package com.edg.domain.usecase.favouriteproduts
+package com.edg.domain.usecase.favProducts
 
 import com.edg.domain.models.products.Product
 import com.edg.domain.repository.FavouriteProductsRepository
@@ -19,6 +19,10 @@ class FavProductsUseCaseImpl @Inject constructor(private val repository: Favouri
 
     override suspend fun getAllFavouriteProducts(): Flow<Resource<List<Product>>> {
         return repository.getAllFavouriteProducts()
+    }
+
+    override suspend fun isProductExist(id: String): Boolean {
+        return repository.isProductExist(id)
     }
 
 
